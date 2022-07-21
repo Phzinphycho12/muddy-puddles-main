@@ -1076,7 +1076,10 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
-		
+   
+       #if android
+      addVirtualPad(FULL, A_B);
+      #end
 		super.create();
 
 		Paths.clearUnusedMemory();
@@ -1816,6 +1819,10 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown():Void
 	{
+		#if android	
+     androidc.visible = true;
+     #end
+     
 		if(startedCountdown) {
 			callOnLuas('onStartCountdown', []);
 			return;
